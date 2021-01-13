@@ -1,4 +1,5 @@
 import os, htmlparser, strutils, strtabs, strformat
+import httpclient
 import xmltree except escape
 import re
 
@@ -181,8 +182,9 @@ proc html2Karax*(raw: string, tag: string = "html"): string =
 
 when isMainModule:
   if paramCount() == 0:
-    quit("missing path to html file")
+    quit("missing arg")
 
-  let filename = paramStr(1)
+  let client = newHttpClient()
+  let resp = client.get(paramStr(1))
 
-  echo readFile(filename).html2Karax()
+  echo html2Karax(resp.body)
