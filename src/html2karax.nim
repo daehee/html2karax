@@ -42,9 +42,9 @@ template to(t: string) {.dirty.} =
         text = text.escape()
         if text.find(re"\\x0A") > 0:
           text = text.replace(re"\\x0A\s?"," ")
-        karaxHtml.add indent("\ntext t " & text , incremental+2)
+        karaxHtml.add indent("\ntext " & text , incremental+2)
       else:
-        karaxHtml.add indent("\ntext t \"" & text & "\"" , incremental+2)
+        karaxHtml.add indent("\ntext \"" & text & "\"" , incremental+2)
 
 proc parseXmlNode(node: var XmlNode) =
   case node.tag
